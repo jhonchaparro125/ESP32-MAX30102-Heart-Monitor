@@ -74,10 +74,6 @@ int contadorGrafica = 0;
 //                 SERIAL PLOTTER
 // =====================================================
 
-// La TFT continúa actualizándose cada 4 muestras.
-// El Serial Plotter se actualiza cada 2 muestras,
-// aproximadamente 200 puntos por segundo.
-
 #define MUESTRAS_PLOTTER 16
 
 int contadorPlotter = 0;
@@ -453,14 +449,6 @@ void loop()
     // =================================================
     // SERIAL PLOTTER
     // =================================================
-    //
-    // Ahora se envía una muestra cada 2 lecturas.
-    // Con FS = 400 Hz:
-    //
-    // 400 / 2 = 200 muestras por segundo.
-    //
-    // Esto hace que la gráfica se vea más continua
-    // y compacta sin modificar la gráfica de la TFT.
 
     contadorPlotter++;
 
