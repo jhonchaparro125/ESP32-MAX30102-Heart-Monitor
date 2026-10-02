@@ -66,25 +66,23 @@ La pantalla TFT muestra:
 
 Cuando no se detecta un dedo sobre el MAX30102, el sistema muestra un mensaje indicando que se debe colocar el dedo y reinicia las mediciones anteriores.
 
-## Medición de BPM
+## Procesamiento de las mediciones
 
-La frecuencia cardíaca se obtiene a partir de los pulsos detectados en la señal infrarroja del MAX30102.
+A partir de las señales obtenidas por el MAX30102, el ESP32 realiza tres procesos principales:
 
-El sistema calcula el intervalo entre latidos y utiliza varias mediciones para obtener un valor de BPM más estable.
+### ❤️ Frecuencia cardíaca (BPM)
 
-## Medición de SpO₂
+La señal infrarroja se utiliza para detectar cada latido. A partir del tiempo entre latidos se calcula la frecuencia cardíaca y se promedian varias mediciones para obtener un valor más estable.
 
-La estimación de SpO₂ utiliza las señales roja e infrarroja proporcionadas por el MAX30102.
+### 🩸 Saturación de oxígeno (SpO₂)
 
-Las muestras se almacenan temporalmente y se procesan mediante el algoritmo de SpO₂. El sistema valida las mediciones obtenidas y utiliza varias lecturas para mejorar la estabilidad del valor mostrado.
+Para estimar el SpO₂ se utilizan conjuntamente las señales roja e infrarroja. Las muestras se almacenan y procesan en bloques, descartando mediciones que no sean válidas y estabilizando el resultado antes de mostrarlo.
 
-## Señal PPG
+### 📈 Señal PPG
 
-La señal PPG permite observar las variaciones producidas por el flujo sanguíneo detectadas ópticamente por el MAX30102.
+La señal infrarroja también se procesa para obtener la forma de onda PPG. Antes de visualizarla se aplican filtros para reducir ruido, eliminar variaciones de la línea base y disminuir interferencias.
 
-Antes de mostrarla, la señal pasa por diferentes etapas de procesamiento digital para reducir ruido e interferencias.
-
-La señal procesada puede observarse tanto en la pantalla TFT como en el Serial Plotter del Arduino IDE.
+La señal resultante se muestra en tiempo real en la pantalla TFT y también puede observarse mediante el Serial Plotter del Arduino IDE.
 
 ## Serial Plotter
 
